@@ -17,5 +17,4 @@ yarn build # if using npm, change 'yarn build:prod' to 'npm run build:prod'
 ### Website screenshot
 ![homepage screenshot](assets/website_screenshot.png)
 
-### Website screenshot
-![label prediction in action](assets/label_prediction.mp4)
+[Video of Label Prediction on website](assets/label_prediction.mp4)
