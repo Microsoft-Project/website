@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet"> -->
+  <link href="dist/main.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+  <script src="main.js"></script>
+</head>
+
+<body>
+<div class="relative bg-white overflow-hidden">
+  <div class="mx-auto" style="max-width: 90rem">
+    <div class="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32"
+         style="max-width: 50rem;">
+      <svg class="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-white transform translate-x-1/2"
+           fill="currentColor" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+        <polygon points="50,0 100,0 50,100 0,100"/>
+      </svg>
+
+      <div class="relative pt-6 px-4 sm:px-6 lg:px-8">
+        <nav class="relative flex items-center justify-between sm:h-10 lg:justify-start" aria-label="Global">
+          <div class="flex items-center flex-grow flex-shrink-0 lg:flex-grow-0">
+            <div class="flex items-center justify-between w-full md:w-auto">
+              <a href="#">
+                <span class="sr-only">Workflow</span>
+                <img class="h-8 w-auto sm:h-10" src="./assets/logo.png">
+              </a>
+            </div>
+          </div>
+          <div class="md:block md:ml-10 md:pr-4 md:space-x-8">
+            <a href="#demo" style="margin-right: 10px;" class="font-medium text-gray-500 hover:text-gray-900">Demo</a>
+            <a href="https://github.com/Microsoft-Project/labelling-bot"
+               style="margin-right: 10px;" class="font-medium text-gray-500 hover:text-gray-900">Github</a>
+            <a href="https://github.com/apps/labelling-bot" class="font-medium text-gray-500 hover:text-gray-900">Homepage</a>
+          </div>
+        </nav>
+      </div>
+
+      <main class="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
+        <div class="sm:text-center lg:text-left">
+          <h3 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+            <span class="block">Fire and Forget</span>
+            <span class="block text-indigo-600">Introducing Label Bot</span>
+          </h3>
+          <div
+              class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+            <span class="text-2xl block">LabelBot is a Github application that can be used to automatically tag an issue with a Github label.</span>
+            <p class="pt-3">It uses machine learning to read the comment body and title to estimate what the issue might
+              be about, and
+              then labels the issue following the publishing of a short comment notifying the issue creator of the
+              same.</p>
+
+            <br>
+            When an issue is opened, the bot predicts if the label should be a: <span
+              class="p-1 px-3 sm:rounded-md text-lg leading-6 font-medium text-gray-800 bg-red-400">🐞 bug</span>, <span
+              style="background-color: #a2eeef"
+              class="p-1 px-3 sm:rounded-md text-lg leading-6 font-medium text-gray-800">💡 enhancement</span> or <span
+              style="background-color: #d876e3"
+              class="p-1 px-3 sm:rounded-md text-lg leading-6 font-medium text-gray-800"><span
+              class="text-white">?</span> question</span> labels and
+            applies a label automatically if appropriate.
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
+    <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"
+         src="./assets/Group%207.jpg"
+         alt="">
+  </div>
+</div>
+
+<div class="bg-gray-100">
+  <div style="max-width: 90rem; margin-left: auto; margin-right: auto; padding: 40px;">
+    <div>
+      <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+        <span class="block text-indigo-600">Try it out</span>
+      </h2>
+    </div>
+
+    <div id="demo" class="grid grid-cols-4">
+      <div class="col-span-2 max-w-7xl py-6">
+        <div class="mt-5 md:mt-0 md:col-span-2">
+          <div class="shadow sm:rounded-md sm:overflow-hidden">
+            <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
+              <div>
+                <label for="title" class="block text-sm font-medium text-gray-700">
+                  Title
+                </label>
+                <div class="mt-1 flex rounded-md shadow-sm">
+                  <input type="text" name="title" id="issue-title"
+                         class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-md sm:text-sm border-gray-300"
+                         placeholder="Issue title">
+                </div>
+              </div>
+              <div>
+                <label for="comment" class="block text-sm font-medium text-gray-700">
+                  Text
+                </label>
+                <div class="mt-1">
+										<textarea id="issue-body" name="comment" rows="3"
+                              class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md"
+                              placeholder="Issue body" required></textarea>
+                </div>
+                <p id="invalid-issue-body" class="display-none text-red-400">Issue body can not be empty</p>
+              </div>
+            </div>
+            <div class="flex justify-between items-center px-4 py-3 bg-gray-50 text-right sm:px-6">
+              <p id="request-error" class="invisible text-red-400">Request failed!</p>
+              <button id="predictlabel"
+                      class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                Predict Label
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-span-2 py-6 sm:px-6 lg:px-8">
+        <div id="result">
+          <div class="bg-white shadow overflow-hidden sm:rounded-md">
+            <div class="px-4 py-5 sm:px-6">
+              <div class="flex justify-between">
+                <div>
+                  <h3 class="inline-block text-lg leading-6 font-medium text-gray-900">
+                    Prediction Information
+                  </h3>
+                  <span id="progress-spinner" class="spinner-border display-none"
+                        style="width: 1.5rem; height: 1.5rem; margin-left: 10px;" role="status">
+											<span class="visually-hidden">Loading...</span>
+										</span>
+                </div>
+                <p id="predicted-label"
+                   class="p-1 px-3 sm:rounded-md text-lg leading-6 font-medium text-gray-800"></p>
+              </div>
+            </div>
+            <div class="border-t border-gray-200">
+              <dl>
+                <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <dt class="text-sm font-medium text-gray-500">
+                    Data Before Preprocessing
+                  </dt>
+                  <dd id="data-before-preprocessing" class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                  </dd>
+                </div>
+                <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <dt class="text-sm font-medium text-gray-500">
+                    Data After Preprocessing
+                  </dt>
+                  <dd id="data-after-preprocessing" class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                  </dd>
+                </div>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="pt-10">
+  <div class="shadow rounded-md" style="max-width: 90rem; margin-left: auto; margin-right: auto; padding: 40px;">
+    <div style="padding: 40px;">
+      <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+        <span class="block text-indigo-600">Bot in action on Github</span>
+      </h2>
+      <img class="pt-10 w-full" width="600px" height="600px" src="./assets/github.png" alt="confusion matrix">
+    </div>
+  </div>
+</div>
+
+<div class="bg-gray-100" style="margin-top: 40px;">
+  <div style="max-width: 90rem; margin-left: auto; margin-right: auto; padding: 40px;">
+    <div class="grid grid-cols-2 py-8 pb-8">
+      <div>
+        <h2 class="pb-6 text-4xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+          <span class="block text-gray-600">Lets talk about data</span>
+        </h2>
+        <p class="pb-6 text-3xl text-gray-500">
+          We mined Github API and GHTorrent dumps to get label specific issues of trending repositories
+        </p>
+        <ul class="list-disc">
+          <li class="pb-4 text-2xl text-gray-500 font-light ">Trending repositories are fetched from GHTorrent based
+            upon
+            their stars and forks.
+          </li>
+          <li class="pb-4 text-2xl text-gray-500 font-light">GitHub API is used to fetch issues from these repositories
+            based on their labels.
+          </li>
+          <li class="pb-4 text-2xl text-gray-500 font-light">As of now, our dataset contains issues tagged with bug,
+            question and enhancement.
+          </li>
+          <li class="pb-4 text-2xl text-gray-500 font-light">We ensure that the issue is primarily related to the label
+            we
+            have queried for, we take the following
+            measure - If the issue is tagged with any other default Github label, it is ignored.
+          </li>
+        </ul>
+      </div>
+      <div class="items-center self-center" style="width: 600px; height: 600px; margin-left: auto">
+        <canvas id="bar-chart" width="100" height="100"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--<div class="hidden sm:block" aria-hidden="true">-->
+<!--  <div class="py-8">-->
+<!--    <div class="border-t-2 border-gray-200"></div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<div style="max-width: 90rem; margin-left: auto; margin-right: auto; padding: 40px;">
+  <div class="grid grid-cols-2 py-8 pb-8">
+    <img class="w-full" width="600px" height="600px" src="./assets/labels_bar_chart.jpeg" alt="confusion matrix">
+    <div style="margin-left: 80px;">
+      <div>
+        <h2 class="pb-6 text-4xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+          <span class="block text-gray-600">Target Labels Selection</span>
+        </h2>
+        <p class="pb-6 text-3xl text-gray-500">
+          Initially, we fetched issues tagged with all default Github labels
+        </p>
+      </div>
+      <ul class="list-disc">
+        <li class="pb-4 text-2xl text-gray-500 font-light">Documentation was removed due to insufficient data points.
+          Comments tagged with documentation also did not show
+          convincing similarity in terms of word embeddings.
+        </li>
+        <li class="pb-4 text-2xl text-gray-500 font-light">Comments tagged with invalid, duplicate, wontfix and good
+          first issue also did not show convincing similarity in
+          terms of word embeddings.
+        </li>
+        <li class="pb-4 text-2xl text-gray-500 font-light">This is understandable because the labels invalid, duplicate,
+          wontfix and good first issues are tagged to a
+          issue by the maintainer based on characteristics other than the comment body.
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="bg-gray-100" style="margin-top: 40px;">
+  <div style="max-width: 90rem; margin-left: auto; margin-right: auto; padding: 40px;">
+    <div class="grid grid-cols-2 py-8 pb-8">
+      <div>
+        <h2 class="pb-6 text-4xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+          <span class="block text-gray-600">Model Selection</span>
+        </h2>
+        <p class="pb-6 text-3xl text-gray-500">
+          We compared the performance across 4 ML models based on our dataset.
+        </p>
+        <ul class="list-disc">
+          <li class="pb-4 text-2xl text-gray-500 font-light">Linear Support Vector Classifier: <span
+              class="font-medium">73.46%</span>
+          </li>
+          <li class="pb-4 text-2xl text-gray-500 font-light">Logistic Regression: <span
+              class="font-medium">73.34%</span>
+          </li>
+          <li class="pb-4 text-2xl text-gray-500 font-light">Multinomial Naive Bayes: <span
+              class="font-medium">69.74%</span></li>
+          <li class="pb-4 text-2xl text-gray-500 font-light">Random Forest Classifier: <span
+              class="font-medium">50.59%</span></li>
+        </ul>
+
+        <p class="pt-8 text-2xl text-gray-500">
+          Upon comparing the accuracies we chose to use Linear Support Vector Classifier for the labelling-bot.
+        </p>
+      </div>
+      <img class="w-full" width="600px" height="600px" src="./assets/model_accuracy.jpeg" alt="confusion matrix">
+    </div>
+  </div>
+</div>
+
+<div style="max-width: 90rem; margin-left: auto; margin-right: auto; padding: 40px;">
+  <div class="grid grid-cols-2 py-8 pb-8">
+    <img class="w-full" width="600px" height="600px" src="./assets/confusion_matrix.jpeg" alt="confusion matrix">
+    <div style="margin-left: 80px;">
+      <div>
+        <h2 class="pb-6 text-4xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+          <span class="block text-gray-600">Confusion Matrix</span>
+        </h2>
+        <p class="pb-6 text-3xl text-gray-500">
+          A Confusion Matrix is a table that is used to visually demonstrate the performance of a
+          classification model.
+        </p>
+      </div>
+      <ul class="list-disc">
+        <li class="pb-4 text-2xl text-gray-500 font-light">We perform classification on the test set which is obtained
+          after a 80-20 train-test split.
+        </li>
+        <li class="pb-4 text-2xl text-gray-500 font-light">The horizontal axis("predicted") denotes the labels that
+          have been predicted by the model.
+        </li>
+        <li class="pb-4 text-2xl text-gray-500 font-light">The vertical axis("actual") denotes the labels the
+          data points actually had in the data set.
+        </li>
+        <li class="pb-4 text-2xl text-gray-500 font-light">The diagonal from the top-left to the bottom-right
+          corner denotes accurate predictions.
+        </li>
+        <li class="pb-4 text-2xl text-gray-500 font-light">What we observe in this model is relatively higher
+          accuracy for bug and enhancement labels when compared to question.
+        </li>
+        <li class="pb-4 text-2xl text-gray-500 font-light">From this we conclude that issues labelled as question
+          tend to be more open-ended in terms of their body(embedding based similarity).
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<footer class="flex justify-center px-4 text-gray-100" style="background-color: rgb(39, 47, 62)">
+  <div class="container py-6" style="max-width: 90rem; margin-left: auto; margin-right: auto; padding: 40px;">
+    <h2 class="text-center text-4xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+      <span class="block text-white">The Team</span>
+    </h2>
+    <div class="flex justify-center mt-6">
+      <div class="p-6 flex flex-col items-center">
+        <a href="https://github.com/mujahid-kh">
+          <img class="rounded-full shadow" src="./assets/mujahid_web_photo.png" alt="image" width="100px;"
+               height="100px;">
+        </a>
+        <p class="pt-4 font-bold">Mujahid Khan</p>
+        <p>mnk1998@gmail.com</p>
+      </div>
+      <div class="p-6 flex flex-col items-center">
+        <a href="https://github.com/talhahussain7">
+          <img class="rounded-full shadow" src="./assets/talhahussain.png" alt="image" width="100px;" height="100px;">
+        </a>
+        <p class="pt-4 font-bold">Talha Hussain</p>
+        <p>talhahussainb@gmail.com</p>
+      </div>
+      <div class="p-6 flex flex-col items-center">
+        <a href="https://github.com/haiderali711">
+          <img class="rounded-full shadow" src="./assets/haider_s.png" alt="image" width="100px;" height="100px;">
+        </a>
+        <p class="pt-4 font-bold">Haider Ali</p>
+        <p>ali.haider7111@gmail.com</p>
+      </div>
+      <div class="p-6 flex flex-col items-center">
+        <a href="https://github.com/totsteps">
+          <img class="rounded-full shadow" src="./assets/logo.png" alt="image" width="100px;" height="100px;">
+        </a>
+        <p class="pt-4 font-bold">Gagandeep Singh</p>
+        <p>gaganrattan9@gmail.com</p>
+      </div>
+    </div>
+
+    <hr class="h-px mt-6 bg-gray-700 border-none">
+
+    <div class="container pt-4">
+      <div class="flex flex-col items-center justify-between mt-6 md:flex-row">
+        <div>
+          <span class="sr-only">Workflow</span>
+          <img class="h-8 w-auto sm:h-10"
+               src="./assets/logo.png">
+        </div>
+        <div class="flex mt-4 md:m-0">
+          <div class="-mx-4">
+            <a href="#" class="px-4 text-sm">Demo</a>
+            <a href="https://github.com/Microsoft-Project/labelling-bot" class="px-4 text-sm">Github</a>
+            <a href="https://github.com/apps/labelling-bot" class="px-4 text-sm">Homepage</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+<script>
+  const pred_labels = ['bug', 'enhancement', 'question']
+  const dataset_size = [2637, 2279, 2607]
+
+  const chartDiv = document.getElementById('bar-chart').getContext('2d');
+
+  const chart = new Chart(chartDiv, {
+    type: 'bar',
+    data: {
+      labels: pred_labels,
+      datasets: [{
+        label: 'Dataset Size per label',
+        data: dataset_size,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(205, 180, 84, 0.2)',
+          'rgba(190, 255, 130, 0.2)',
+          'rgba(99, 255, 192, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+          'rgba(205, 180, 84, 1)',
+          'rgba(190, 255, 130, 1)',
+          'rgba(99, 255, 192, 1)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  });
+</script>
+</html>
